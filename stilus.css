@@ -1,0 +1,19 @@
+.kiv {
+    background-color: antiquewhite;
+}
+
+.tartalom {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 5px;
+}
+
+.elem {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+    flex: 0 0 200px;
+}
