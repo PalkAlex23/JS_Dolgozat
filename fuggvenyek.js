@@ -1,5 +1,5 @@
 export function szovegesKimenet(lista) {
-    const tartalomELEM = document.querySelector(".tartalom")
+    const tartalomELEM = $(".tartalom")
     let txt = "";
     for (let i = 0; i < lista.length; i++) {
         txt += `<div class="elem">
@@ -8,41 +8,40 @@ export function szovegesKimenet(lista) {
         <p>Életkora: ${lista[i].kor}</p>
         </div>`
     }
-    tartalomELEM.innerHTML += txt;
+    tartalomELEM.html(txt);
 }
 
 export function hatterValtozas() {
-    const tartalomELEMEK = document.querySelectorAll(".elem")
+    const tartalomELEMEK = $(".elem")
     for (let i = 0; i < tartalomELEMEK.length; i++) {
-        tartalomELEMEK[i].addEventListener("mouseover", function() {
-            tartalomELEMEK[i].classList.add("kiv")
+        tartalomELEMEK.eq(i).on("mouseenter", function() {
+            tartalomELEMEK.eq(i).addClass("kiv")
         })
     }
     for (let i = 0; i < tartalomELEMEK.length; i++) {
-        tartalomELEMEK[i].addEventListener("mouseout", function() {
-            tartalomELEMEK[i].classList.remove("kiv")
+        tartalomELEMEK.eq(i).on("mouseleave", function() {
+            tartalomELEMEK.eq(i).removeClass("kiv")
         })
     }
 }
 
 export function kivalasztas() {
     const KIVALASZTOTTAK = []
-    const tartalomELEMEK = document.querySelectorAll(".elem p")
-    for (let i = 0; i < tartalomELEMEK.length; i++) {
-        tartalomELEMEK[i].addEventListener("click", function() {
-            const kivalasztottELEM = document.querySelector(".kivalasztott")
+    let txt = ""
+    const tartalomELEMEK = $(".elem p")
+        tartalomELEMEK.on("click", function(event) {
+            const kivalasztottELEM = $(".kivalasztott")
             for (let index = 0; index < KIVALASZTOTTAK.length; index++) {
-                if (tartalomELEMEK[i] === KIVALASZTOTTAK[index]) {
-                    kivalasztottELEM.innerHTML += ""
+                if ($(event.target) === KIVALASZTOTTAK[index]) {
+                    kivalasztottELEM.html("")
                 }
             }
-            let txt = `<ul>
-                <li>${tartalomELEMEK[i].innerHTML}</li>
+            txt += `<ul>
+                <li>${$(event.target).html()}</li>
             </ul>`
-            kivalasztottELEM.innerHTML += txt
-            KIVALASZTOTTAK.push(tartalomELEMEK[i].innerHTML)
+            kivalasztottELEM.html(txt)
+            KIVALASZTOTTAK.push($(event.target))
             console.log(KIVALASZTOTTAK)
         })
-    }
     console.log(KIVALASZTOTTAK)
 }
